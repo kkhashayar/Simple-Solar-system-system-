@@ -1,0 +1,81 @@
+import turtle
+
+screen = turtle.Screen()
+screen.setup(800,800,0,0)
+screen.bgcolor("black")
+screen.title("Solar System_ class version")
+screen.tracer(0)
+
+class Bord(turtle.Turtle):
+    def __init__(self):
+        turtle.Turtle.__init__(self)
+        self.pencolor("orange")
+        self.pensize(2)
+        self.speed(0)
+        self.penup()
+        self.setposition(-250, -250)
+        self.hideturtle()
+
+    def draw(self):
+        for i in range(4):
+            self.pendown()
+            self.forward(500)
+            self.left(90)
+            self.hideturtle()
+            
+class Star(turtle.Turtle):
+        def __init__(self, sh_size, color, m_speed, x_pos, y_pos):
+                turtle.Turtle.__init__(self)
+                self.shape("circle")
+                self.penup()
+                self.shapesize(sh_size)
+                self.pencolor(color)
+                self.fillcolor(color)
+                self.speed(m_speed)
+                self.setposition(x_pos, y_pos)
+                self.x = self.xcor()
+                self.y = self.ycor()
+                self.pendown()
+                
+class Planet(turtle.Turtle):
+        def __init__(self, sh_size, color, d_speed,velocity, x_pos, y_pos):
+                turtle.Turtle.__init__(self)
+                self.shape("circle")
+                self.pensize(0.1)
+                self.shapesize(sh_size)
+                self.penup()
+                self.pencolor(color)
+                self.fillcolor(color)
+                self.speed(d_speed)
+                self.v_speed = velocity  
+                self.setpos(x_pos, y_pos)
+                self.x = self.xcor()
+                self.y = self.ycor()            
+
+        def orbit(self, distance, angle):
+            self.forward(distance)
+            self.left(angle)
+
+
+# OBJECTS
+# (self, sh_size, color, d_speed,velocity, x_pos, y_pos)
+sun = Star(3,"yellow",0,0,0)
+mercury = Planet(0.14,"white", 0, 0.1, 0, -40)
+venus = Planet(0.35, "blue4",0 , 0.1, 0, -84)
+earth = Planet(0.46, "blue", 0, 0.031, 0, -125)
+moon = Planet(0.03, "white", 0, 10, 0,0)
+mars = Planet(0.39, "red",0, 0.034, 0, -155)
+jupiter = Planet(1.5, "orange", 0,0.032, 0, -230)
+saturn = Planet(1.2, "blue1",0, 0.030, 0, -290)
+
+while True:
+        screen.update()
+        mercury.orbit(0.1 ,0.14)
+        venus.orbit(0.1, 0.080)
+        earth.orbit(0.031, 0.015)
+        moon.setx(earth.xcor())
+        moon.sety(earth.ycor() -2)
+        moon.orbit(10, 0.2)
+        mars.orbit(0.033, 0.01300)
+        jupiter.orbit(0.032, 0.0100)
+        saturn.orbit(0.029, 0.0080)
